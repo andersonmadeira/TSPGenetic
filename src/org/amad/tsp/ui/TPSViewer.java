@@ -23,11 +23,11 @@ class TSPViewer extends JComponent {
 	public static final int DEFAULT_HEIGHT = 500;
 	public static final int DEFAULT_CIRCLE_RADIUS = 30;
 	
-	public TSPViewer() {
-		float[] dash2 = { 1f, 1f, 1f };
+	public TSPViewer(LoggerPanel l) {
+		this.logger = l;
 		// TODO Auto-generated constructor stub
 		defaultStroke = new BasicStroke(1, BasicStroke.CAP_ROUND,
-	            BasicStroke.JOIN_BEVEL, 1.0f, dash2, 2f );
+	            BasicStroke.JOIN_BEVEL);
 		
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         generateNewSimulation();
@@ -86,11 +86,9 @@ class TSPViewer extends JComponent {
     public void generateNewSimulation() {
 		// TODO Auto-generated method stub
     	City.resetCityCount();
+    	if (logger != null) logger.clear();
     	createNodes();
-    	if (logger != null) {
-    		logger.clear();
-    		logDistances();
-    	}
+    	if (logger != null) logDistances();
     	repaint();
 	}
     
@@ -104,7 +102,6 @@ class TSPViewer extends JComponent {
         					   (int) (Math.random() * (DEFAULT_HEIGHT - 100)));
         	if (logger != null) {
         		logger.pushText("City "+new_c.getId()+": "+new_c.toString()+"\n");
-        		
         	}
         	cities.add(new_c);
         }
@@ -121,7 +118,7 @@ class TSPViewer extends JComponent {
     
     public void logDistances() {
     	if (logger == null) return;
-    	ArrayList<City> copyList = (ArrayList<City>) cities.clone();
+		ArrayList<City> copyList = (ArrayList<City>) cities.clone();
     	City c = null;
     	
     	logger.pushText(" =>Distances:\n");
@@ -140,5 +137,9 @@ class TSPViewer extends JComponent {
     
     public void setLogger(LoggerPanel logger) {
 		this.logger = logger;
+	}
+    
+    public LoggerPanel getLogger() {
+		return logger;
 	}
 }

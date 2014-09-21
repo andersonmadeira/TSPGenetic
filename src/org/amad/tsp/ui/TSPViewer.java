@@ -11,33 +11,40 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 import org.amad.tsp.algo.City;
+import org.amad.tsp.algo.Population;
+import org.amad.tsp.algo.Route;
 import org.amad.tsp.algo.RoutesInfo;
 
 @SuppressWarnings("serial")
 public class TSPViewer extends JComponent {
 	
 	private BasicStroke defaultStroke;
-	private LoggerPanel logger = null;
 	
 	public static final int DEFAULT_WIDTH = 700;
 	public static final int DEFAULT_HEIGHT = 500;
 	public static final int DEFAULT_CIRCLE_RADIUS = 30;
 	
+	private Graphics2D g2d = null;
+	private RenderingHints rh = null;
+	private Route best = null;
+	
+	/**
+	 * WARNING: Before creating a viewer you must have a Simulation set (Instance) 
+	 * @param l
+	 */
 	public TSPViewer(LoggerPanel l) {
-		this.logger = l;
 		// TODO Auto-generated constructor stub
 		defaultStroke = new BasicStroke(1, BasicStroke.CAP_ROUND,
 	            BasicStroke.JOIN_BEVEL);
 		
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        generateNewSimulation();
 	}
 
 	public void render(Graphics g) {
 
-        Graphics2D g2d = (Graphics2D) g;
+        g2d = (Graphics2D) g;
         
-        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+        rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         
         rh.put(RenderingHints.KEY_RENDERING,
@@ -61,6 +68,20 @@ public class TSPViewer extends JComponent {
         for(int i = 0; i < RoutesInfo.cityCount(); i++) {
         	drawCity(g2d, RoutesInfo.getCity(i));
         }
+        
+        if (best == null) return;
+        
+        City c1 = null, c2 = null;
+        
+        g2d.setStroke(defaultStroke);
+        
+    	for (int index = 0; index < best.size()-1; index++) {
+			c1 = best.getCity(index);
+			c2 = best.getCity(index+1);
+			g2d.setColor(Color.red);
+    		g2d.drawLine(c1.getCenterX(), c1.getCenterY(), 
+    					 c2.getCenterX(), c2.getCenterY());
+		}
     }
 
     @Override
@@ -69,18 +90,10 @@ public class TSPViewer extends JComponent {
         render(g);
     }
     
-    public void generateNewSimulation() {
-		// TODO Auto-generated method stub
-    	// 1. Creates the cities, just the data
-    	RoutesInfo.createCities(20);
-    	if (logger != null) logger.clear();
-    	// dump cities and distances to logger
-    	logCities();
-    	logDistances();
-    	// repaint component
-    	repaint();
-	}
-    
+    public void setBestSolution(Route route) {
+    	best = route;
+    }
+
     private void drawCity(Graphics2D g2d, City c) {
 		// TODO Auto-generated method stub
     	g2d.setColor(c.getColor());
@@ -89,55 +102,5 @@ public class TSPViewer extends JComponent {
     	g2d.setColor(Color.white);
     	
     	g2d.drawString(String.valueOf(c.getSymbol()), c.getCenterX()-5, c.getCenterY()+5);
-	}
-    
-    /**
-     * Log cities to logger for debug
-     */
-    private void logCities() {
-		// TODO Auto-generated method stub
-    	if (logger == null) return;
-        
-        for(int i = 0; i < RoutesInfo.cityCount(); i++)
-        	logger.pushText("City "+RoutesInfo.getCity(i).getId()+": "+
-        					RoutesInfo.getCity(i).toString()+"\n");
-	}
-    
-    /**
-     * Log distances between cities for debug
-     */
-    public void logDistances() {
-    	if (logger == null) return;
-		ArrayList<City> copyList = (ArrayList<City>) RoutesInfo.getArrayOfCities();
-    	City c = null;
-    	
-    	logger.pushText(" =>Distances:\n");
-    	
-    	while(!copyList.isEmpty()) {
-    		c = copyList.remove(0);
-    		
-    		for(int j = 0; j < copyList.size(); j++) {
-    			
-    			logger.pushText(" from "+c+"("+c.getId()+
-    							") to "+copyList.get(j)+"("+copyList.get(j).getId()+"): "+
-    							(int)c.distanceTo(copyList.get(j))+"\n");
-    		}
-    	}
-    }
-    
-    /** 
-     * Sets the logger panel associated with this simulation
-     * @param logger
-     */
-    public void setLogger(LoggerPanel logger) {
-		this.logger = logger;
-	}
-    
-    /**
-     * Gets the logger
-     * @return
-     */
-    public LoggerPanel getLogger() {
-		return logger;
 	}
 }

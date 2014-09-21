@@ -35,6 +35,10 @@ public class Simulation {
     		viewer.setBestSolution(null);
     		viewer.repaint();
     	}
+    	
+    	if (logger != null) {
+    		logger.clear();
+    	}
 	}
 	
 	public void run(int generations) {
@@ -43,15 +47,15 @@ public class Simulation {
 		
 		// if we still have the first generation (random population)
 		if (lastGen == 0) {
-			logger.clear();
 			logger.pushText("+First population created.\n");
     		logger.pushText("+Now logging best Solutions:\n");
 		}
 		
-		for (int i = 1; i <= generations; i++, lastGen++) {
+		for (int i = 1; i <= generations; i++) {
+			lastGen += 1;
 			step();
 			best = getBestSolution();
-			logger.pushText(" G["+(i+lastGen)+"]: D["+best.getTotalDistance()+
+			logger.pushText(" G["+(lastGen)+"]: D["+best.getTotalDistance()+
 							"] F["+best.getFitness()+"] P["+best+"]\n");
 			
 		}

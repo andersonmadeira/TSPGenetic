@@ -25,4 +25,4 @@ Main buttons:
 
 Watch for the logger down in the window.
 
-**Pull requests / ideas / suggestions are always welcome**
+**Pull requests / ideas / suggestions are always welcome :D**

@@ -19,17 +19,24 @@ public class OptionsPanel extends JPanel {
 		// TODO Auto-generated constructor stub
 		this.simulation = sim;
 		
-		JButton startButton = new JButton("Evolve");
-		startButton.addActionListener(new ActionListener() {
+		JButton evolveButton = new JButton("Evolve");
+		evolveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				simulation.run(25);
+				simulation.run(10);
 			}
 		});
-		add(startButton);
-		add(new JButton("Pause"));
-		add(new JButton("Stop"));
+		add(evolveButton);
+		JButton nextButton = new JButton("Next Generation");
+		nextButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				simulation.run(1);
+			}
+		});
+		add(nextButton);
 		JButton newButton = new JButton("New Simulation");
 		newButton.addActionListener(new ActionListener() {
 			@Override

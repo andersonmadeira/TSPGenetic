@@ -14,6 +14,7 @@ public class Simulation {
 	private Population pop = null;
 	private LoggerPanel logger = null;
 	private TSPViewer viewer = null;
+	private int lastGen = 0;
 	
 	public Simulation() {
 		// TODO Auto-generated constructor stub
@@ -27,7 +28,9 @@ public class Simulation {
     	// 2. Create the first population with random solutions 
     	pop = new Population(50);
     	pop.generateRandom();
-    	// 3. Redraw stuff
+    	// 3. Set lastGen to 0, this is now the first, new individuals were born
+    	lastGen = 0;
+    	// 4. Redraw stuff
     	if (viewer != null) {
     		viewer.setBestSolution(null);
     		viewer.repaint();
@@ -38,12 +41,19 @@ public class Simulation {
 		// TODO Auto-generated method stub
 		Route best = null;
 		
-		logger.pushText("+Logging best Solutions:\n");
+		// if we still have the first generation (random population)
+		if (lastGen == 0) {
+			logger.clear();
+			logger.pushText("+First population created.\n");
+    		logger.pushText("+Now logging best Solutions:\n");
+		}
 		
-		for (int i = 1; i <= generations; i++) {
+		for (int i = 1; i <= generations; i++, lastGen++) {
 			step();
 			best = getBestSolution();
-			logger.pushText(" "+i+": "+best+"\n");
+			logger.pushText(" G["+(i+lastGen)+"]: D["+best.getTotalDistance()+
+							"] F["+best.getFitness()+"] P["+best+"]\n");
+			
 		}
 		
 		viewer.setBestSolution(best);

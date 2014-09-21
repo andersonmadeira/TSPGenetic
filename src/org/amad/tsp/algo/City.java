@@ -67,7 +67,6 @@ public class City {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return getCenterX()+","+getCenterY();
 	}
 	

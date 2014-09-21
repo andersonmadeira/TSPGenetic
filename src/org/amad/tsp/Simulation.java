@@ -21,12 +21,10 @@ public class Simulation {
 	private int lastGen = 0;
 	
 	public Simulation() {
-		// TODO Auto-generated constructor stub
 		reset();
 	}
 	
 	public void reset() {
-		// TODO Auto-generated method stub
 		// 1. Creates the cities, just the data
     	CityManager.createCities(20);
     	// 2. Create the first population with random solutions 
@@ -46,7 +44,6 @@ public class Simulation {
 	}
 	
 	public void run(int generations) {
-		// TODO Auto-generated method stub
 		Route best = null;
 		
 		// if we still have the first generation (random population)
@@ -72,7 +69,6 @@ public class Simulation {
 	 * Step simulation - i.e. evolve population
 	 */
 	private void step() {
-		// TODO Auto-generated method stub
 		pop = Algorithm.evolve(pop);
 	}
 	
@@ -81,7 +77,6 @@ public class Simulation {
 	 * @return The best solution from the current population
 	 */
 	public Route getBestSolution() {
-		// TODO Auto-generated method stub
 		return pop.getFittest();
 	}
 
@@ -91,7 +86,6 @@ public class Simulation {
      */
     @SuppressWarnings("unused")
 	private void logCities() {
-		// TODO Auto-generated method stub
     	if (logger == null) return;
         
         for(int i = 0; i < CityManager.getTotal(); i++)

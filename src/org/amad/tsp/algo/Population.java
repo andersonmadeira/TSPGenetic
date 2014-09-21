@@ -15,7 +15,6 @@ public class Population {
      * Creates a route of random cities
      */
     public void generateRandom() {
-		// TODO Auto-generated method stub
         for (int i = 0; i < size(); i++) {
             Route r = new Route();
             r.buildRandomRoute();

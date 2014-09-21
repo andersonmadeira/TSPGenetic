@@ -31,7 +31,6 @@ public class TSPViewer extends JComponent {
 	 * @param l
 	 */
 	public TSPViewer(LoggerPanel l) {
-		// TODO Auto-generated constructor stub
 		defaultStroke = new BasicStroke(1, BasicStroke.CAP_ROUND,
 	            BasicStroke.JOIN_BEVEL);
 		
@@ -93,7 +92,6 @@ public class TSPViewer extends JComponent {
     }
 
     private void drawCity(Graphics2D g2d, City c) {
-		// TODO Auto-generated method stub
     	g2d.setColor(c.getColor());
     	g2d.fillOval(c.getX(), c.getY(), 
     			City.getDefaultRadius(), City.getDefaultRadius());

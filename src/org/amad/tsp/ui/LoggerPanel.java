@@ -22,7 +22,6 @@ public class LoggerPanel extends JPanel {
 	
 	// only ui package needs this class
 	public LoggerPanel() {
-		// TODO Auto-generated constructor stub
 		Box box = Box.createVerticalBox();
 		box.setAlignmentX(SwingConstants.LEFT);
 		
@@ -41,12 +40,10 @@ public class LoggerPanel extends JPanel {
 	}
 	
 	public void pushText(String text) {
-		// TODO Auto-generated method stub
 		log.append(text);
 	}
 	
 	public void clear() {
-		// TODO Auto-generated method stub
 		log.setText("Simulation log:\n");
 	}
 }

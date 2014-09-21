@@ -28,7 +28,6 @@ public class Route {
     }
     
     public void setCity(int i, City c) {
-		// TODO Auto-generated method stub
     	route.set(i, c);
     	fitness = 0;
     	distance = 0;
@@ -52,7 +51,6 @@ public class Route {
      * @return
      */
     public boolean containsCity(City c) {
-		// TODO Auto-generated method stub
     	return route.contains(c);
 	}
     
@@ -83,7 +81,6 @@ public class Route {
     }
     
     public int size() {
-		// TODO Auto-generated method stub
     	return route.size();
 	}
     

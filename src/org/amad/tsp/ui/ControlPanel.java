@@ -18,7 +18,6 @@ public class ControlPanel extends JPanel {
 	private Simulation simulation = null;
 	
 	public ControlPanel(Simulation sim) {
-		// TODO Auto-generated constructor stub
 		this.simulation = sim;
 		
 		JButton evolveButton = new JButton("Evolve");
@@ -26,7 +25,6 @@ public class ControlPanel extends JPanel {
 		evolveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				simulation.run(10);
 			}
 		});
@@ -36,7 +34,6 @@ public class ControlPanel extends JPanel {
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				simulation.run(1);
 			}
 		});
@@ -46,7 +43,6 @@ public class ControlPanel extends JPanel {
 		newButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				simulation.reset();
 			}
 		});
@@ -55,7 +51,6 @@ public class ControlPanel extends JPanel {
 		aboutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				JOptionPane.showMessageDialog(null, 
 						"Anderson de Oliveira Madeira, 2014\nhttp://andersonmadeira.github.io",  
 						"About", JOptionPane.INFORMATION_MESSAGE);

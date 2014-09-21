@@ -11,6 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+/**
+ * Used for simulation logs. Other classes, specially Simulation and TSPViewer use it
+ * for debug and logging.
+ * @author Anderson Madeira
+ */
 @SuppressWarnings("serial")
 public class LoggerPanel extends JPanel {
 	private JTextArea log = null;

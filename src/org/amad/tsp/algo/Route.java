@@ -13,15 +13,15 @@ public class Route {
      * Default constructor
      */
     public Route() {
-        for (int i = 0; i < RoutesInfo.cityCount(); i++)
+        for (int i = 0; i < CityManager.getTotal(); i++)
             route.add(null);
     }
     
     // Creates a random route
     public void buildRandomRoute() {
         // add all cities to this route
-        for (int i = 0; i < RoutesInfo.cityCount(); i++) {
-          setCity(i, RoutesInfo.getCity(i));
+        for (int i = 0; i < CityManager.getTotal(); i++) {
+          setCity(i, CityManager.get(i));
         }
         // mix
         Collections.shuffle(route);

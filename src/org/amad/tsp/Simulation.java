@@ -6,10 +6,14 @@ import org.amad.tsp.algo.Algorithm;
 import org.amad.tsp.algo.City;
 import org.amad.tsp.algo.Population;
 import org.amad.tsp.algo.Route;
-import org.amad.tsp.algo.RoutesInfo;
+import org.amad.tsp.algo.CityManager;
 import org.amad.tsp.ui.LoggerPanel;
 import org.amad.tsp.ui.TSPViewer;
 
+/**
+ * Holds all relevant information and state of the current simulation
+ * @author Anderson Madeira
+ */
 public class Simulation {
 	private Population pop = null;
 	private LoggerPanel logger = null;
@@ -24,7 +28,7 @@ public class Simulation {
 	public void reset() {
 		// TODO Auto-generated method stub
 		// 1. Creates the cities, just the data
-    	RoutesInfo.createCities(20);
+    	CityManager.createCities(20);
     	// 2. Create the first population with random solutions 
     	pop = new Population(50);
     	pop.generateRandom();
@@ -85,13 +89,14 @@ public class Simulation {
     /**
      * Log cities to logger for debug
      */
-    private void logCities() {
+    @SuppressWarnings("unused")
+	private void logCities() {
 		// TODO Auto-generated method stub
     	if (logger == null) return;
         
-        for(int i = 0; i < RoutesInfo.cityCount(); i++)
-        	logger.pushText("City "+RoutesInfo.getCity(i).getId()+": "+
-        					RoutesInfo.getCity(i).toString()+"\n");
+        for(int i = 0; i < CityManager.getTotal(); i++)
+        	logger.pushText("City "+CityManager.get(i).getId()+": "+
+        					CityManager.get(i).toString()+"\n");
 	}
     
     /**
@@ -99,7 +104,7 @@ public class Simulation {
      */
     public void logDistances() {
     	if (logger == null) return;
-		ArrayList<City> copyList = (ArrayList<City>) RoutesInfo.getArrayOfCities();
+		ArrayList<City> copyList = (ArrayList<City>) CityManager.getArrayOfCities();
     	City c = null;
     	
     	logger.pushText(" =>Distances:\n");

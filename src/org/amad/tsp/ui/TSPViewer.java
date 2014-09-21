@@ -6,14 +6,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
 import org.amad.tsp.algo.City;
-import org.amad.tsp.algo.Population;
 import org.amad.tsp.algo.Route;
-import org.amad.tsp.algo.RoutesInfo;
+import org.amad.tsp.algo.CityManager;
 
 @SuppressWarnings("serial")
 public class TSPViewer extends JComponent {
@@ -53,11 +51,11 @@ public class TSPViewer extends JComponent {
         g2d.setRenderingHints(rh);
         g2d.setStroke(defaultStroke);
         
-        for(int i = 0; i < RoutesInfo.cityCount(); i++) {
-        	City s = RoutesInfo.getCity(i);
+        for(int i = 0; i < CityManager.getTotal(); i++) {
+        	City s = CityManager.get(i);
         	for(int j = 0; j < 10; j++) {
         		if (i == j) break;
-        		City d = RoutesInfo.getCity(j);
+        		City d = CityManager.get(j);
         		g2d.setColor(Color.GRAY);
         		g2d.drawLine(s.getCenterX(), s.getCenterY(), 
         					 d.getCenterX(), d.getCenterY());
@@ -65,8 +63,8 @@ public class TSPViewer extends JComponent {
         }
         
         g2d.setFont(new Font("Monospace", Font.BOLD, 15));
-        for(int i = 0; i < RoutesInfo.cityCount(); i++) {
-        	drawCity(g2d, RoutesInfo.getCity(i));
+        for(int i = 0; i < CityManager.getTotal(); i++) {
+        	drawCity(g2d, CityManager.get(i));
         }
         
         if (best == null) return;

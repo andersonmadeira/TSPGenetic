@@ -7,6 +7,10 @@ import javax.swing.JFrame;
 
 import org.amad.tsp.Simulation;
 
+/**
+ * It creates the simulation, the logger and the viewer
+ * @author Anderson Madeira
+ */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	private Simulation sim = null;
@@ -17,7 +21,7 @@ public class MainWindow extends JFrame {
 		sim.setLogger(new LoggerPanel());
 		sim.setViewer(new TSPViewer(sim.getLogger()));
 		
-		con.add(new OptionsPanel(sim), BorderLayout.NORTH);
+		con.add(new ControlPanel(sim), BorderLayout.NORTH);
 		con.add(sim.getViewer(), BorderLayout.CENTER);
         con.add(sim.getLogger(), BorderLayout.SOUTH);
         
@@ -25,6 +29,6 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(700, 600);
-        setResizable(true);        
+        setResizable(false);        
     }
 }

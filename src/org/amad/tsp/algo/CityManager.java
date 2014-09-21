@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import org.amad.tsp.ui.TSPViewer;
 
-public class RoutesInfo {
+/**
+ * Manages the cities, holds cities info
+ * @author anderson
+ *
+ */
+public class CityManager {
     // cities
     private static ArrayList<City> cities = null;
     
@@ -13,29 +18,28 @@ public class RoutesInfo {
     	City.resetCityCount();
     	
     	for(int i = 0; i < cityCount; i++) {
-        	addCity(new City((int) (Math.random() * (TSPViewer.DEFAULT_WIDTH - 100)), 
+        	add(new City((int) (Math.random() * (TSPViewer.DEFAULT_WIDTH - 100)), 
 					(int) (Math.random() * (TSPViewer.DEFAULT_HEIGHT - 100)),
 					String.valueOf((char) (i+65))));
         }
     }
     
-    public static City getCity(int i) {
-		// TODO Auto-generated method stub
+    public static City get(int i) {
     	return cities.get(i);
 	}
     
-    public static void addCity(City c) {
+    public static void add(City c) {
     	cities.add(c);
     }
     
-    public static int cityCount() {
+    public static int getTotal() {
     	return cities.size();
     }
     
     /**
      * @return clone of the underlying ArrayList of cities
      */
-    public static ArrayList<City> getArrayOfCities() {
+	public static ArrayList<City> getArrayOfCities() {
     	return (ArrayList<City>) cities.clone();
     }
 }

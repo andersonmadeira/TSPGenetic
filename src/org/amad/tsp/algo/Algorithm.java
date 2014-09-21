@@ -1,5 +1,11 @@
 package org.amad.tsp.algo;
 
+/**
+ * This class holds the Genetic Algorithm itself. Here we have three static methods
+ * for the four main 'steps' of a GA: Evolve, Selection, Crossover, Mutation 
+ * @author Anderson Madeira
+ *
+ */
 public class Algorithm {
 
     /* Main Parameters */

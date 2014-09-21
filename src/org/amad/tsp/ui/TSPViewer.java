@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 import org.amad.tsp.algo.City;
+import org.amad.tsp.algo.RoutesInfo;
 
 @SuppressWarnings("serial")
-class TSPViewer extends JComponent {
+public class TSPViewer extends JComponent {
 	
 	private BasicStroke defaultStroke;
-	private ArrayList<City> cities = null;
 	private LoggerPanel logger = null;
 	
 	public static final int DEFAULT_WIDTH = 700;
@@ -34,19 +34,6 @@ class TSPViewer extends JComponent {
 	}
 
 	public void render(Graphics g) {
-		
-		Color[] colors = {
-			new Color(125, 167, 116),
-			new Color(42, 179, 231),
-			new Color(70, 67, 123),
-			new Color(130, 100, 84),
-			new Color(252, 211, 61),
-			new Color(241, 98, 69),
-			new Color(217, 146, 54),
-			new Color(63, 121, 186),
-			new Color(31, 21, 1),
-			Color.red
-		};
 
         Graphics2D g2d = (Graphics2D) g;
         
@@ -59,11 +46,11 @@ class TSPViewer extends JComponent {
         g2d.setRenderingHints(rh);
         g2d.setStroke(defaultStroke);
         
-        for(int i = 0; i < 10; i++) {
-        	City s = cities.get(i);
+        for(int i = 0; i < RoutesInfo.cityCount(); i++) {
+        	City s = RoutesInfo.getCity(i);
         	for(int j = 0; j < 10; j++) {
         		if (i == j) break;
-        		City d = cities.get(j);
+        		City d = RoutesInfo.getCity(j);
         		g2d.setColor(Color.GRAY);
         		g2d.drawLine(s.getCenterX(), s.getCenterY(), 
         					 d.getCenterX(), d.getCenterY());
@@ -71,9 +58,8 @@ class TSPViewer extends JComponent {
         }
         
         g2d.setFont(new Font("Monospace", Font.BOLD, 15));
-        for(int i = 0; i < 10; i++) {
-        	g2d.setColor(colors[i]);
-        	drawCity(g2d, cities.get(i));
+        for(int i = 0; i < RoutesInfo.cityCount(); i++) {
+        	drawCity(g2d, RoutesInfo.getCity(i));
         }
     }
 
@@ -85,40 +71,44 @@ class TSPViewer extends JComponent {
     
     public void generateNewSimulation() {
 		// TODO Auto-generated method stub
-    	City.resetCityCount();
+    	// 1. Creates the cities, just the data
+    	RoutesInfo.createCities(20);
     	if (logger != null) logger.clear();
-    	createNodes();
-    	if (logger != null) logDistances();
+    	// dump cities and distances to logger
+    	logCities();
+    	logDistances();
+    	// repaint component
     	repaint();
-	}
-    
-    private void createNodes() {
-		// TODO Auto-generated method stub
-    	cities = new ArrayList<City>();
-    	City new_c = null;
-        
-        for(int i = 0; i < 10; i++) {
-        	new_c = new City((int) (Math.random() * (DEFAULT_WIDTH - 100)), 
-        					   (int) (Math.random() * (DEFAULT_HEIGHT - 100)));
-        	if (logger != null) {
-        		logger.pushText("City "+new_c.getId()+": "+new_c.toString()+"\n");
-        	}
-        	cities.add(new_c);
-        }
 	}
     
     private void drawCity(Graphics2D g2d, City c) {
 		// TODO Auto-generated method stub
+    	g2d.setColor(c.getColor());
     	g2d.fillOval(c.getX(), c.getY(), 
     			City.getDefaultRadius(), City.getDefaultRadius());
     	g2d.setColor(Color.white);
     	
-    	g2d.drawString(String.valueOf(c.getId()), c.getCenterX()-5, c.getCenterY()+5);
+    	g2d.drawString(String.valueOf(c.getSymbol()), c.getCenterX()-5, c.getCenterY()+5);
 	}
     
+    /**
+     * Log cities to logger for debug
+     */
+    private void logCities() {
+		// TODO Auto-generated method stub
+    	if (logger == null) return;
+        
+        for(int i = 0; i < RoutesInfo.cityCount(); i++)
+        	logger.pushText("City "+RoutesInfo.getCity(i).getId()+": "+
+        					RoutesInfo.getCity(i).toString()+"\n");
+	}
+    
+    /**
+     * Log distances between cities for debug
+     */
     public void logDistances() {
     	if (logger == null) return;
-		ArrayList<City> copyList = (ArrayList<City>) cities.clone();
+		ArrayList<City> copyList = (ArrayList<City>) RoutesInfo.getArrayOfCities();
     	City c = null;
     	
     	logger.pushText(" =>Distances:\n");
@@ -135,10 +125,18 @@ class TSPViewer extends JComponent {
     	}
     }
     
+    /** 
+     * Sets the logger panel associated with this simulation
+     * @param logger
+     */
     public void setLogger(LoggerPanel logger) {
 		this.logger = logger;
 	}
     
+    /**
+     * Gets the logger
+     * @return
+     */
     public LoggerPanel getLogger() {
 		return logger;
 	}

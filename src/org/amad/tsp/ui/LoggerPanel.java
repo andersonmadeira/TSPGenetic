@@ -22,7 +22,7 @@ public class LoggerPanel extends JPanel {
 		box.setAlignmentX(SwingConstants.LEFT);
 		
 		log = new JTextArea("Simulation Log:\n");
-        //a.setEditable(false);
+        log.setEditable(false);
 		log.setRows(4);
 		log.setColumns(44);
 		log.setFont(new Font("Monospace", Font.PLAIN, 15));

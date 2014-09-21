@@ -1,4 +1,5 @@
-TSPGenetic
-==========
+# TSPGenetic
 
-Using Genetic Algorithm to 'solve' The Traveling Salesman Problem
+#### Introduction:
+
+The goal is to use *Genetic Algorithm* to 'solve' The *Traveling Salesman Problem*

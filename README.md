@@ -2,7 +2,7 @@
 
 #### Introduction:
 
-The goal is to use *Genetic Algorithm* to 'solve' The *Traveling Salesman Problem*
+This application finds solution paths to The [*Travelling Salesman Problem*](http://en.wikipedia.org/wiki/Travelling_salesman_problem) using [*Genetic Algorithm*](http://en.wikipedia.org/wiki/Genetic_algorithm). 
 
 #### Overview:
 
@@ -16,7 +16,7 @@ A brief overview of this implementation:
 
 Main buttons:
 
-- Evolve: evolve the current population to 50 generations ahead.
+- Evolve: evolve the current population to 10 generations ahead.
 - Next Generation: evolve to next generation.
 - New Simulation: create a blank simulation(graph) with a random new population of solutions.
 - About: self-explanatory

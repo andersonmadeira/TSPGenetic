@@ -25,4 +25,8 @@ Main buttons:
 
 Watch for the logger down in the window.
 
+#### References:
+
+This project is strongly based (main GA idea; selection, mutation and crossover operators) on this great tutorial by [*The Project Spot*](http://www.theprojectspot.com/tutorial-post/applying-a-genetic-algorithm-to-the-travelling-salesman-problem/5). Please refer to his tutorial for a brief explanation.
+
 **Pull requests / ideas / suggestions are always welcome :D**

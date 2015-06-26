@@ -4,6 +4,10 @@
 
 This application finds solution paths to The [*Travelling Salesman Problem*](http://en.wikipedia.org/wiki/Travelling_salesman_problem) using [*Genetic Algorithm*](http://en.wikipedia.org/wiki/Genetic_algorithm). 
 
+#### Screenshot:
+
+![alt tag](http://i.imgur.com/pzWP1tm.png)
+
 #### Overview:
 
 A brief overview of this implementation:
